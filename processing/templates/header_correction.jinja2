@@ -1,0 +1,18 @@
+You are an expert technical editor. Your task is to fix the markdown header levels in a document to ensure a strict and logical hierarchy.
+
+Rules for header levels:
+1. The top-level header is usually H1 (#).
+2. Header levels must increment by at most one step at a time (e.g., H1 -> H2 is valid, H1 -> H3 is invalid).
+3. It is valid to jump back to a higher-level header (e.g., H3 -> H1 starts a new major section).
+4. Review the semantics of the header text to determine if it should be a subsection of the previous header.
+
+Here is the list of headers in the document:
+{% for header in headers %}
+Index: {{ loop.index0 }}
+Current Level: {{ header.metadata.level }}
+Content: "{{ header.metadata.header }}"
+---
+{% endfor %}
+
+Review the list above. If you find any headers that violate the hierarchy rules or seem misplaced based on their content, call the `modify_header_level` function to correct them.
+Pass the `index` of the header and the `new_level` (integer between 1 and 6).
